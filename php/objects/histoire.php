@@ -1,6 +1,6 @@
 <?php
 
-include './publication.php';
+include_once __DIR__ . '/publication.php';
 
 class Histoire extends Publication {
     public $tranche_de_date;
