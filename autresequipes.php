@@ -1,6 +1,6 @@
 <?php
-include("configuration/config.php");
-include("php/database.php");
+include __DIR__ . "/configuration/config.php";
+include __DIR__ . "/php/database.php";
 $database = Database::getInstance()->getConnection();
 $query = $database->query("SELECT * FROM equipe");
 $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -14,6 +14,7 @@ $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <?php include './php/components/header.php' ?>
     <div class="container">
         <aside>
             <h1 class="autres-equipes">Autres équipes</h1>
@@ -66,18 +67,7 @@ $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </section>
         </main>
-        <footer>
-            <div class="footer-left">
-                <span>Logo</span>
-                <span>Admin</span>
-                <span>US Colomiers - Tous droits réservés</span>
-            </div>
-            <div class="footer-right">
-                <button class="footer-btn"></button>
-                <button class="footer-btn"></button>
-                <button class="footer-btn"></button>
-            </div>
-        </footer>
     </div>
+    <?php include './php/components/footer.php' ?>
 </body>
 </html>
