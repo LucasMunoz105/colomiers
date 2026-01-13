@@ -10,6 +10,7 @@ include __DIR__ . "/objects/article.php";
 include __DIR__ . "/objects/histoire.php";
 include __DIR__ . "/objects/partenaires.php";
 include __DIR__ . "/objects/equipe.php";
+include __DIR__ . "/objects/joueur.php";
 
 class Database {
     private static $instance = null;
@@ -98,7 +99,7 @@ class Database {
         foreach ($rows as $row) {
             $partners[] = new Partenaire(
                 $row['photo'],
-                $row['lien'],
+                $row['photo'],
                 $row['nom_societe'],
             );
         }
@@ -122,6 +123,28 @@ class Database {
             );
         }
         return $equipes;
+    }
+
+    public function loadJoueurs() {
+        $joueurs = [];
+        
+        $sql = "SELECT * FROM joueur";
+        $query = $this->connection->query($sql);
+
+        $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as $row) {
+            $joueurs[] = new Joueur(
+                $row['nom'],
+                $row['prenom'],
+                $row['role'],
+                $row['poste'],
+                $row['photo']
+            );
+        }
+        return $joueurs;
+
+        
     }
 }
 
