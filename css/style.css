@@ -19,6 +19,10 @@
     --white: #FFFFFF;
 }
 
+body {
+    margin: 0;
+}
+
 /* --- STYLE GENERAL DU HEADER --- */
 .main-header {
     background-color: var(--platinum);
@@ -91,8 +95,9 @@
     color: var(--primary-blue);
 }
 
-/* --- BOUTON BOUTIQUE  --- */
-.btn-boutique {
+/* --- BOUTONS BOUTIQUE --- */
+.btn-boutique,
+.btn-boutique-footer {
     background-color: var(--primary-blue);
     color: var(--white);
     padding: 10px 24px;
@@ -101,17 +106,20 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 0.9rem;
+
     box-shadow: 0 4px 0 #0000A0, 0 6px 10px rgba(0,0,239,0.3);
     transition: all 0.2s ease;
     display: inline-block;
 }
 
-.btn-boutique:hover {
+.btn-boutique:hover,
+.btn-boutique-footer:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 0 #0000A0, 0 8px 15px rgba(0,0,239,0.4);
 }
 
-.btn-boutique:active {
+.btn-boutique:active,
+.btn-boutique-footer:active {
     transform: translateY(2px);
     box-shadow: 0 2px 0 #0000A0;
 }
@@ -133,8 +141,7 @@
     padding: 0 20px;
 }
 
-
-/* --- FOOTER --- */
+/* --- FOOTER ELEMENTS --- */
 
 .footer-left {
     display: flex;
@@ -194,25 +201,3 @@
     background-color: #0000A0;
 }
 
-/* Bouton boutique du footer */
-.btn-boutique-footer {
-    background-color: var(--primary-blue);
-    color: var(--white);
-    padding: 8px 18px;
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    box-shadow: 0 3px 0 #0000A0;
-    transition: all 0.2s ease;
-}
-
-.btn-boutique-footer:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 0 #0000A0;
-}
-
-.btn-boutique-footer:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 0 #0000A0;
-}
