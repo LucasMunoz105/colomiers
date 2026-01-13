@@ -1,6 +1,6 @@
 <?php
-include __DIR__ . "/configuration/config.php";
-include __DIR__ . "/php/database.php";
+include("configuration/config.php");
+include("php/database.php");
 $database = Database::getInstance()->getConnection();
 $query = $database->query("SELECT * FROM equipe");
 $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -13,14 +13,14 @@ $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
     <title>Autres équipes</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <?php include './php/components/header.php' ?>
-    <div class="container">
-        <aside>
-            <h1 class="autres-equipes">Autres équipes</h1>
+<?php include './php/components/header.php'; ?>
+<body class="autresequipes-body">
+    <div class="autresequipes-container">
+        <aside class="autresequipes-aside">
+            <h1 class="autresequipes-autres-equipes">Autres équipes</h1>
         </aside>
         <main>
-            <section class="section-feminine">
+            <section class="autresequipes-section-feminine">
                 <h2>Section féminine</h2>
                 <?php
                 $feminines = [];
@@ -30,11 +30,11 @@ $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
                     }
                 }
                 ?>
-                <div class="block-row">
+                <div class="autresequipes-block-row">
                 <?php foreach ($feminines as $feminine): ?>
-                    <div class="block block-tall">
+                    <div class="autresequipes-block block-tall">
                         <img src="image.jpg" alt="image équipe féminine">
-                        <div class="equipe-info">
+                        <div class="autresequipes-equipe-info">
                             <strong><?= $feminine['nom'] ?></strong><br>
                             <a href="<?= $feminine['lien_calendrier'] ?>" target="_blank">Calendrier</a> |
                             <a href="<?= $feminine['lien_classement'] ?>" target="_blank">Classement</a>
@@ -43,7 +43,7 @@ $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
                 </div>
             </section>
-            <section class="section-jeunes">
+            <section class="autresequipes-section-jeunes">
                 <h2>Sections jeunes</h2>
                 <?php
                 $jeunes = [];
@@ -53,11 +53,11 @@ $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
                     }
                 }
                 ?>
-                <div class="block-row">
+                <div class="autresequipes-block-row">
                 <?php foreach ($jeunes as $jeune): ?>
-                    <div class="block block-tall">
+                    <div class="autresequipes-block block-tall">
                         <img src="image.jpg" alt="image équipe jeune">
-                        <div class="equipe-info">
+                        <div class="autresequipes-equipe-info">
                             <strong><?= $jeune['nom'] ?></strong><br>
                             <a href="<?= $jeune['lien_calendrier'] ?>" target="_blank">Calendrier</a> |
                             <a href="<?= $jeune['lien_classement'] ?>" target="_blank">Classement</a>
@@ -68,6 +68,6 @@ $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
             </section>
         </main>
     </div>
-    <?php include './php/components/footer.php' ?>
+    <?php include './php/components/footer.php'; ?>
 </body>
 </html>
