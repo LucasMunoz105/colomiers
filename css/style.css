@@ -1,3 +1,4 @@
+<<<<<<<<< Temporary merge branch 1
 .block-tall {
     overflow: hidden;
 }
@@ -118,6 +119,16 @@ footer {
     border-top: 1px solid #e0e0e0;
 }
 
+.block-tall {
+    overflow: hidden;
+}
+
+.block-tall img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
 .footer-left span {
     margin-right: 12px;
 }
@@ -159,6 +170,7 @@ footer {
         height: 32px;
     }
 }
+=========
 /* --- POLICES LOCALES --- */
 @font-face {
     font-family: 'Montserrat';
@@ -377,3 +389,4 @@ footer {
     transform: translateY(1px);
     box-shadow: 0 1px 0 #0000A0;
 }
+>>>>>>>>> Temporary merge branch 2
