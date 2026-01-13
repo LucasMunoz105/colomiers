@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <?php include "./php/database.php";?>
 </body>
 </html>
