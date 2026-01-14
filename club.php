@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/club.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
+<?php
+ include "./php/components/header.php";
+?>
 <body>
  <main>
     <h1>Le Club</h1>
@@ -56,4 +61,7 @@
 
  </main>
 </body>
+<?php
+ include "./php/components/footer.php";
+?>
 </html>
