@@ -1,3 +1,5 @@
+<?php include __DIR__ . "/php/database.php" ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,14 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
-<?php
- include "./php/components/header.php";
-?>
 
 <body>
+    <?php include "./php/components/header.php";?>
 
     <section class="hero-section">
         <div class="hero-content">
@@ -55,15 +55,33 @@
             <h2 class="section-title">Dernières Actus</h2>
             
             <div class="news-grid">
+                <?php
+                
+                $lastactus = Database::getInstance()->loadArticles();
+                $counter = 0;
+
+                foreach($lastactus as $actu) :
+                
+                    $counter+=1;
+
+                    if($counter <= 3): //vérification qu'on a bien que 3 articles à la une
+                
+                ?>
+
                 <article class="news-card">
                     <img src="" alt="Image Actualité" class="news-img">
                     
                     <div class="news-content">
-                        <h3 class="news-title">Victoire éclatante de l'équipe réserve</h3>
-                        <p class="news-meta">Nom Prénom - 12/01/2026</p>
+                        <h3 class="news-title"><?php echo $actu->titre; ?></h3>
+                        <p class="news-meta"><?php echo $actu->categorie; ?> - <?php echo $actu->date; ?></p>
                         <a href="#" class="read-more">Lire l'article</a>
                     </div>
                 </article>
+
+                <?php 
+                    endif;
+                    endforeach; 
+                ?>
 
                 </div>
         </div>
@@ -74,34 +92,18 @@
             <h2 class="section-title">Nos partenaires</h2>
             
             <div class="partners-grid">
+                <?php $partners = Database::getInstance()->loadPartners();
+                foreach($partners as $partner):
+                ?>
                 <div class="partner-box">
-                    <img src="" alt="Partenaire" class="partner-logo">
-                    <span class="partner-name">Nom partenaire</span>
+                    <img src="<?php echo $partner->logo;?>" alt="Partenaire" class="partner-logo">
+                    <span class="partner-name"><?php echo $partner->nom?></span>
                 </div>
-                <div class="partner-box">
-                    <img src="" alt="Partenaire" class="partner-logo">
-                    <span class="partner-name">Nom partenaire</span>
-                </div>
-                <div class="partner-box">
-                    <img src="" alt="Partenaire" class="partner-logo">
-                    <span class="partner-name">Nom partenaire</span>
-                </div>
-                <div class="partner-box">
-                    <img src="" alt="Partenaire" class="partner-logo">
-                    <span class="partner-name">Nom partenaire</span>
-                </div>
-                <div class="partner-box">
-                    <img src="" alt="Partenaire" class="partner-logo">
-                    <span class="partner-name">Nom partenaire</span>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
-
+    <?php include "./php/components/footer.php"; ?>
 </body>
-
-<?php
- include "./php/components/footer.php";
-?>
 
 </html>

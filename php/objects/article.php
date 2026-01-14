@@ -4,7 +4,7 @@
     // $article = Database::getInstance()->loadArticles();
     // echo $article[1]->titre pour afficher le premier de la liste;
 
-include __DIR__ . '/publication.php';
+include_once __DIR__ . '/publication.php';
 class Article extends Publication {
 
     public $date;

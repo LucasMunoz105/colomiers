@@ -1,28 +1,20 @@
 <?php 
-
-include '../database.php';
-
 // $database = Database::getInstance()->getConnection(); <= pour intéragir avec la base de données !!!!
 // $query = $database->query("SELECT * FROM table");
 // $a = $query->fetchAll(PDO::FETCH_ASSOC);
 // print_r($a);
 
-class Partenaires {
+class Partenaire {
 
-    private $id;
-    private $logo;
-    private $lien;
-    private $nom;
+    public $id;
+    public $logo;
+    public $lien;
+    public $nom;
 
-    public function __construct(Admin $admin, $logo, $lien, $nom) {
+    public function __construct($logo, $lien, $nom) {
         $this->logo = $logo;
         $this->lien = $lien;
         $this->nom = $nom;
-
-        $database = Database::getInstance()->getConnection();
-        // $query = $database->query("INSERT INTO") requête à modifier
-
-        // $this->id = ; database request
     }
 
     public function load () {
