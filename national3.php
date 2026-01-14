@@ -1,11 +1,4 @@
-<?php include __DIR__ . "/php/database.php"; 
-
-// Récupérer la connexion via la méthode getInstance()
-$database = Database::getInstance();
-$pdo = $database->getConnection();  // Récupère la connexion PDO
-?>
-
-
+<?php include __DIR__ . "/php/database.php" ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
