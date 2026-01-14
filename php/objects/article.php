@@ -30,48 +30,39 @@ class Article extends Publication {
 
         $this->id = null;
     }
-}
 
-/*
     public function save() {
-        $db = Database::getConnection();
 
+        // save() est une méthode qui permet d'insérer une instance dans la bdd si elle n'y est pas déjà ou de l'update
+        // l'objet doit être déjà construit et s'utiliser de cette manière : $article->save() ($article étant une instance d'article)
+
+        $db = Database::getInstance()->getConnection();
         if ($this->id === null) {
             // CREATE
-            $sql = "INSERT INTO article () VALUES ()";
+            $sql = "INSERT INTO article (titre, contenu, image, date_publication, categorie) VALUES (:titre, :contenu, :image, :date_publication, :categorie)";
             $stmt = $db->prepare($sql);
             $stmt->execute([
-                'name' => $this->name,
-                'email' => $this->email
+                'titre' => $this->titre,
+                'contenu' => $this->texte,
+                'image' => $this->image,
+                'date_publication' => $this->date,
+                'categorie' => $this->categorie,
             ]);
             $this->id = (int)$db->lastInsertId();
         } else {
             // UPDATE
-            $sql = "UPDATE users SET name = :name, email = :email WHERE id = :id";
+            $sql = "UPDATE article SET titre = :titre, contenu = :contenu, image = :image, date_publication = :date_publication, categorie = :categorie WHERE id = :id";
             $stmt = $db->prepare($sql);
             $stmt->execute([
                 'id' => $this->id,
-                'name' => $this->name,
-                'email' => $this->email
+                'titre' => $this->titre,
+                'contenu' => $this->texte,
+                'image' => $this->image,
+                'date_publication' => $this->date,
+                'categorie' => $this->categorie,
             ]);
         }
     }
-
-    DELETE
-
-    public function delete() {
-        if ($this->id === null) {
-            return;
-        }
-
-        $db = Database::getConnection();
-        $stmt = $db->prepare("DELETE FROM users WHERE id = :id");
-        $stmt->execute(['id' => $this->id]);
-
-        $this->id = null;
-    }
 }
-
-*/
 
 ?>
