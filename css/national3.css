@@ -1,0 +1,15 @@
+.hero-nat3 {
+    background-color: #A0A0A0;
+    padding: 1% 0 1% 0;;
+    width: 60%;
+    margin:auto;
+}
+
+.hero-nat3 h1 {
+    font-size: 75px;
+    text-transform: uppercase;
+    color: var(--dark-blue);
+    font-family: 'Montserrat', sans-serif;
+}
+
+
