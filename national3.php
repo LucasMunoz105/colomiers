@@ -79,6 +79,37 @@ $attaquants = $pdo->query("SELECT * FROM joueur WHERE role = 'Attaquant' ORDER B
   <?php endforeach; ?> 
 </div>
 
+    <section class="section-stats">
+    <div class="stat-container">
+        <h2>Classement</h2>
+        <div class="affichage-classement">
+            </div>
+    </div>
+
+    <div class="stat-container">
+        <h2>Calendrier</h2>
+        <div class="affichage-calendrier">
+            </div>
+    </div>
+
+    <div>
+        <h2>Meilleurs Buteurs</h2>
+        <div class="liste-buteurs">
+            <div class="fiche-buteur">
+                <div class="photo-buteur"></div>
+                <p class="infos-buteur">Nom Prénom - 0 Buts</p>
+            </div>
+            <div class="fiche-buteur">
+                <div class="photo-buteur"></div>
+                <p class="infos-buteur">Nom Prénom - 0 Buts</p>
+            </div>
+            <div class="fiche-buteur">
+                <div class="photo-buteur"></div>
+                <p class="infos-buteur">Nom Prénom - 0 Buts</p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <?php include "./php/components/footer.php"; ?>
 

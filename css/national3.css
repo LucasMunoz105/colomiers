@@ -66,39 +66,35 @@ h3 {
     width: 100%;
 }
 
-/* Texte Nom Prénom */
-.joueur-card p {
+.joueur-card p { /*infos des joueurs*/
     font-weight: bold;
     color: var(--dark-blue);
     font-size: 20px;
     text-transform: uppercase;
 }
 
-/* Container principal pour toute la partie stats */
+/* on regroupe toutes les stats ensemble */
 .section-stats {
     width: 60%; 
-    margin: 60px auto;
+    margin: auto;
     display: flex;
     flex-direction: column;
-    gap: 50px;
 }
 
-/* Style des zones d'affichage (Classement & Calendrier) */
+/* placeholder en attendant les api*/
 .affichage-classement, 
 .affichage-calendrier {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
+    background-color: var(--dark-blue);
     width: 100%;
-    min-height: 400px;
-    margin-top: 15px;
+    height: 400px;
 }
 
-/* Alignement des 3 buteurs côte à côte */
+/* on aligne les 3 buteurs côte à côte */
 .liste-buteurs {
     display: flex;
     justify-content: space-around;
-    gap: 20px;
-    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;       /* Ajoute un espace entre les fiches en mode mobile */
 }
 
 .fiche-buteur {
@@ -107,25 +103,16 @@ h3 {
 }
 
 .photo-buteur {
-    background-color: #ececec;
+    background-color: var(--dark-blue);
     width: 180px;
     height: 180px;
-    margin: 0 auto 15px;
-    border-radius: 5px; /* Optionnel : coins légèrement arrondis */
+    margin: 0 auto;
 }
 
 .infos-buteur {
     font-family: 'PT Sans Narrow', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    color: #003366;
-    font-size: 1.1rem;
-}
-
-/* Pour que les titres H2 des stats soient comme celui de l'Effectif */
-.stat-container h2 {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    color: var(--dark-blue);
+    font-size: 16px;
 }
