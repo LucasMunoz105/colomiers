@@ -56,10 +56,10 @@ class Equipe {
             'nom' => $this->nom,
             'lien_calendrier' => $this->lien_calendrier,
             'lien_classement' => $this->lien_classement
-        ]);
+            ]);
+        }
     }
 }
-
 
 
 ?>
