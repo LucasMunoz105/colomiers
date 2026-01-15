@@ -224,3 +224,10 @@
         margin-top: -40px; /* On remonte moins sur mobile */
     }
 }
+
+
+/* --- HIDDEN --- */
+
+.hidden {
+    display: hidden;
+}

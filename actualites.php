@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<?php include 'php/components/header.php'; ?>
+    <?php include 'php/components/header.php'; ?>
     <div class="actualites-container">
         <header class="actualites-header">
             <h1>Actualités</h1>

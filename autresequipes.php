@@ -23,11 +23,8 @@
             <section class="autresequipes-section-feminine">
                 <h2>Section féminine</h2>
                 <?php
-
                 $equipes = Database::getInstance()->loadEquipe();
-
                 $feminine = $equipes[1];
-
                 ?>
                 <div class="autresequipes-block-row">    
                 <div class="autresequipes-autres-equipes">
