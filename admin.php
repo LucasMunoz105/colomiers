@@ -1,6 +1,10 @@
 <?php 
 session_start();
 
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit();
+} ?>
 // est ce que l'administrateur est connecté
 if (!isset($_SESSION['admin_id'])) {
     // si non on le dirige vers login
@@ -32,6 +36,7 @@ if (!isset($_SESSION['admin_id'])) {
         
         <div class="admin-header">
             <h1 class="section-title">Administration du Site</h1>
+            <a href="logout.php" class="btn-main">Déconnexion</a></br>
             <p>Gérez les sponsors, équipes et l'histoire du club.</p>
         </div>
 
