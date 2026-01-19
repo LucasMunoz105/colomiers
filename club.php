@@ -1,4 +1,10 @@
-<?php include __DIR__ . "/php/database.php" ?>
+<?php include __DIR__ . "/php/database.php";
+
+$database = Database::getInstance();
+$histoires = $database->loadHistories();
+$staffClub = $database->loadStaffClub();
+
+ ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,50 +22,73 @@
 <main class="container">
     <h1 class="page-title">Le Club</h1>
 
-    <section id="dirigeants">
-        <h2>Dirigeants</h2>
-        <div class="dirigeants-grid">
-            <article class="dirigeant">
-                <img src="" alt="Photo dirigeant">
-                <h3>Nom Prénom</h3>
-                <p>Poste</p>
-            </article>
+<section id="dirigeants">
+    <h2>Dirigeants</h2>
+    <div class="dirigeants-grid">
 
-            <article class="dirigeant">
-                <img src="" alt="Photo dirigeant">
-                <h3>Nom Prénom</h3>
-                <p>Poste</p>
-            </article>
-        </div>
-    </section>
+        <?php foreach ($staffClub as $staff): ?>
+            <?php if (
+                $staff->getRole() === 'Président' ||
+                $staff->getRole() === 'Vice-Président'
+            ): ?>
+                <article class="dirigeant">
+                    <img src="" alt="Photo dirigeant">
+                    <h3>
+                        <?= $staff->getPrenom() ?>
+                        <?php echo $staff->getNom() ?>
+                    </h3>
+                    <p><?php echo $staff->getRole() ?></p>
+                </article>
+            <?php endif; ?>
+        <?php endforeach; ?>
 
-    <section id="administration">
-        <h2>Administration</h2>
-        <div class="administration-grid">
-            <article class="admin">
-                <img src="" alt="Photo admin">
-                <h3>Nom Prénom</h3>
-                <p>Poste</p>
-            </article>
+    </div>
+</section>
 
-            <article class="admin">
-                <img src="" alt="Photo admin">
-                <h3>Nom Prénom</h3>
-                <p>Poste</p>
-            </article>
-        </div>
-    </section>
 
-    <section id="histoire">
-        <h2>Histoire</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <div class="histoire-images">
-            <img src="" alt="Histoire du club 1">
-            <img src="" alt="Histoire du club 2">
-        </div>
-    </section>
+<section id="administration">
+    <h2>Administration</h2>
+    <div class="administration-grid">
+
+        <?php foreach ($staffClub as $staff): ?>
+        <?php if (
+            $staff->getRole() === "Trésorier" ||
+            $staff->getRole() === "Trésorier Adjoint" ||
+            $staff->getRole() === "Secrétaire"
+            ): ?>
+                <article class="admin">
+                    <img src="" alt="Photo admin">
+                    <h3>
+                        <?php echo $staff->getPrenom() ?>
+                        <?php echo $staff->getNom() ?>
+                    </h3>
+                    <p><?php echo $staff->getRole() ?></p>
+                </article>
+        <?php endif; ?>
+        <?php endforeach; ?>
+
+    </div>
+</section>
+
+
+
+<section id="histoire">
+    <h2>Histoire</h2>
+
+    <?php foreach ($histoires as $histoire): ?>
+        <article class="histoire-card">
+            <h2><?= $histoire->titre ?></h2>
+            <p><?= $histoire->texte ?></p>
+
+            <div class="histoire-images">
+                <?php if (!empty($histoire->image)): ?>
+                    <img src="<?= $histoire->image ?>" alt="<?= $histoire->titre ?>">
+                <?php endif; ?>
+            </div>
+        </article>
+    <?php endforeach; ?>
+</section>
+
 
 </main>
 

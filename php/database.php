@@ -92,7 +92,7 @@ class Database {
     public function loadHistories() {
         $histoires = [];
 
-        $sql = "SELECT * FROM histoires ORDER BY tranche_date DESC";
+        $sql = "SELECT * FROM histoires ORDER BY tranche_date ASC";
         $query = $this->connection->query($sql);
 
         $rows = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -251,6 +251,36 @@ class Database {
         }
         return $staffs;
     }
+    public function loadStaffClub() {
+    $staffs = [];
+
+    $sql = "SELECT * FROM staff
+            WHERE role IN (
+                'président',
+                'vice-président',
+                'trésorier',
+                'trésorier adjoint',
+                'secrétaire'
+            )";
+
+    $stmt = $this->connection->prepare($sql);
+    $stmt->execute();
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($rows as $row) {
+        $staffs[] = new Staff(
+            $row['id_staff'],
+            $row['nom'],
+            $row['prenom'],
+            $row['role'],
+            $row['email']
+        );
+    }
+
+    return $staffs;
+}
+
     public function loadStaff($id) {
         
         $sql = "SELECT * FROM staff WHERE id_staff = :id";

@@ -63,6 +63,22 @@ class Staff extends Personnel {
 
         $this->id = null;
     }
+    public function getNom() {
+        return $this->nom;
+    }
+
+    public function getPrenom() {
+        return $this->prenom;
+    }
+
+    public function getRole() {
+        return $this->role;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
 
 }
 
