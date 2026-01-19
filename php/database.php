@@ -146,7 +146,7 @@ class Database {
 
     public function loadPartner($id) {
 
-        $sql = "SELECT * FROM partenaires WHERE id_partenaire = :id";
+        $sql = "SELECT * FROM partenaire WHERE id_partenaire = :id";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['id' => $id]);
     
@@ -361,6 +361,4 @@ class Database {
         return $array;
     }
 }
-
-
 ?>

@@ -792,11 +792,6 @@ ul {
 .form button {
     cursor: pointer;
 }
-<<<<<<< HEAD
-/* 
-PAGE ADMINISTRATION */
-=======
->>>>>>> b6a2d19b0647e77b4070394416a93d2599d0c720
 
 /* PAGE ADMINISTRATION */
 
@@ -1025,6 +1020,7 @@ PAGE ADMINISTRATION */
     flex-wrap: wrap;
     gap: 10px;      
     margin-top: 10px;
+    font-size: 0.5rem;
 }
 
 .staff-chip {
@@ -1034,7 +1030,6 @@ PAGE ADMINISTRATION */
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     font-family: var(--font-body);
-    font-size: 0.9rem;
     background-color: var(--white);
 }
 
@@ -1054,7 +1049,6 @@ PAGE ADMINISTRATION */
     color: white;
     border: none;
     padding: 0 12px;
-    font-size: 1.2rem;
     line-height: 1;
     cursor: pointer;
     display: flex;
@@ -1067,23 +1061,6 @@ PAGE ADMINISTRATION */
     background-color: #a71d2a;
 }
 
-/* Style liste équipe */
-
-.staff-pick-title {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--grey-text);
-    margin: 15px 0 10px 0;
-    font-family: var(--font-titles);
-    text-transform: uppercase;
-}
-
-.available-staff-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;  
-}
-
 /* bouton staff non sélectionné */
 .option-staff {
     background-color: var(--platinum);
@@ -1092,8 +1069,8 @@ PAGE ADMINISTRATION */
     padding: 6px 14px;
     border-radius: 20px;             
     font-family: var(--font-body);
-    font-size: 0.85rem;
     font-weight: 600;
+    font-size: 0.5rem;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;

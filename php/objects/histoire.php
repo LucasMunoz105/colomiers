@@ -3,11 +3,11 @@
 include_once __DIR__ . '/publication.php';
 
 class Histoire extends Publication {
-    public $tranche_de_date;
+    public $tranche_date;
 
-    public function __construct($id, $tranche_de_date, $titre, $texte, $image) {
+    public function __construct($id, $tranche_date, $titre, $texte, $image) {
         $this->id = $id;
-        $this->tranche_de_date = $tranche_de_date;
+        $this->tranche_date = $tranche_date;
         $this->titre = $titre;
         $this->texte = $texte;
         $this->image = $image;
@@ -35,7 +35,7 @@ class Histoire extends Publication {
             $stmt = $db->prepare($sql);
             $stmt->execute([
             'titre' => $this->titre,
-            'tranche_date' => $this->tranche_de_date,
+            'tranche_date' => $this->tranche_date,
             'image' => $this->image,
             'contenu' => $this->texte
         ]);
@@ -52,7 +52,7 @@ class Histoire extends Publication {
             $stmt->execute([
                 'id' => $this->id,
                 'titre' => $this->titre,
-                'tranche_date' => $this->tranche_de_date,
+                'tranche_date' => $this->tranche_date,
                 'image' => $this->image,
                 'contenu' => $this->texte
             ]);

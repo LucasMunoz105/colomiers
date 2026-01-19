@@ -12,166 +12,62 @@ function setupListeners() {
 
     let validateTeamButton = document.getElementById("validate-team-button");
 
-    validateTeamButton.addEventListener("click", saveEquipe) 
+    validateTeamButton.addEventListener("click", saveEquipe);
 
     // adapter ce code à chaque entrées
 
+    let addSponsorButton = document.getElementById("create-sponsor");
+
+    addSponsorButton.addEventListener("click", addSponsor);
+
+    let validateSponsorButton = document.getElementById("validate-sponsor-button");
+
+    validateSponsorButton.addEventListener("click", saveSponsor);
+
+    // joueur
+
+    let addJoueurButton = document.getElementById("create-joueur");
+
+    addJoueurButton.addEventListener("click", addJoueur);
+
+    let validateJoueurButton = document.getElementById("validate-joueur-button");
+
+    validateJoueurButton.addEventListener("click", saveJoueur); 
+
+
+    // staff
+
+    let addStaffButton = document.getElementById("create-staff");
+
+    addStaffButton.addEventListener("click", addStaff);
+
+    let validateStaffButton = document.getElementById("validate-staff-button");
+
+    validateStaffButton.addEventListener("click", saveStaff); 
+
+    
+    // histoire
+
+    let addHistoireButton = document.getElementById("create-histoire");
+
+    addHistoireButton.addEventListener("click", addHistoire);
+
+    let validateHistoireButton = document.getElementById("validate-histoire-button");
+
+    validateHistoireButton.addEventListener("click", saveHistoire); 
+
+    
+    // article
+
+    let addArticleButton = document.getElementById("create-article");
+
+    addArticleButton.addEventListener("click", addArticle);
+
+    let validateArticleButton = document.getElementById("validate-article-button");
+
+    validateArticleButton.addEventListener("click", saveArticle); 
+
 }
-
-function setupListenersAjax() {
-
-    let editArticleButtons = document.querySelectorAll('.btn-article-edit');
-    let editArticleTitle = document.getElementById('titre-article-edit');
-
-    let editHistoireButtons = document.querySelectorAll('.btn-histoire-edit');
-    let editHistoireTitle = document.getElementById('titre-histoire-edit');
-
-    let editStaffButtons = document.querySelectorAll('.btn-staff-edit');
-    let editStaffTitle = document.getElementById('titre-staff-edit');
-
-    let editJoueurButtons = document.querySelectorAll('.btn-joueur-edit');
-    let editJoueurTitle = document.getElementById('titre-joueur-edit');
-
-    let editPartenaireButtons = document.querySelectorAll('.btn-partenaire-edit');
-    let editPartenaireTitle = document.getElementById('titre-partenaire-edit');
-
-    let formlist = document.querySelectorAll('.edit-simulation-area');
-
-    editPartenaireButtons.forEach(button => {
-        button.addEventListener('click', () => {
-    
-            let form = document.getElementById('edit-partenaire');
-    
-            let partenaireId = button.dataset.id;
-            let nom = button.dataset.nom;
-            let lien = button.dataset.lien;
-            let image = button.dataset.image;
-    
-            formlist.forEach(formItem => {
-                formItem.classList.add("hidden");
-            });
-    
-            form.closest('.edit-simulation-area').classList.remove("hidden");
-    
-            form.querySelector('input[name="id"]').value = partenaireId;
-            form.querySelector('input[name="nom"]').value = nom;
-            form.querySelector('input[name="lien"]').value = lien;
-    
-            editPartenaireTitle.innerHTML = nom;
-        });
-    });
-
-    editStaffButtons.forEach(button => {
-        button.addEventListener('click', () => {
-    
-            let form = document.getElementById('edit-staff');
-    
-            let staffId = button.dataset.id;
-            let nom = button.dataset.nom;
-            let fonction = button.dataset.fonction;
-            let texte = button.dataset.texte;
-            let image = button.dataset.image;
-    
-            formlist.forEach(formItem => {
-                formItem.classList.add("hidden");
-            });
-    
-            form.closest('.edit-simulation-area').classList.remove("hidden");
-    
-            form.querySelector('input[name="id"]').value = staffId;
-            form.querySelector('input[name="nom"]').value = nom;
-            form.querySelector('input[name="fonction"]').value = fonction;
-            form.querySelector('textarea[name="texte"]').value = texte;
-    
-            editStaffTitle.innerHTML = nom;
-        });
-    });
-
-    editJoueurButtons.forEach(button => {
-        button.addEventListener('click', () => {
-    
-            let form = document.getElementById('edit-joueur');
-    
-            let joueurId = button.dataset.id;
-            let nom = button.dataset.nom;
-            let poste = button.dataset.poste;
-            let texte = button.dataset.texte;
-            let image = button.dataset.image;
-    
-            formlist.forEach(formItem => {
-                formItem.classList.add("hidden");
-            });
-    
-            form.closest('.edit-simulation-area').classList.remove("hidden");
-    
-            form.querySelector('input[name="id"]').value = joueurId;
-            form.querySelector('input[name="nom"]').value = nom;
-            form.querySelector('input[name="poste"]').value = poste;
-            form.querySelector('textarea[name="texte"]').value = texte;
-            // form.querySelector('input[name="image"]').value = image;
-    
-            editJoueurTitle.innerHTML = nom;
-        });
-    });
-    
-    editHistoireButtons.forEach(button => {
-        button.addEventListener('click', () => {
-
-            let form = document.getElementById('edit-history')
-
-            // Récupère les données de l'article depuis les data-attributes
-            let histoireId = button.dataset.id;
-            let titre = button.dataset.titre;
-            let tranche_de_date = button.dataset.trancheDeDate;
-            let texte = button.dataset.texte;
-            let image = button.dataset.image;
-            
-            formlist.forEach(formItem => {
-                formItem.classList.add("hidden");
-            });
-            
-            form.closest('.edit-simulation-area').classList.remove("hidden");
-
-            // Remplit les champs du formulaire
-            form.querySelector('input[name="id"]').value = histoireId;
-            form.querySelector('input[name="titre"]').value = titre;
-            form.querySelector('input[name="tranche_de_date"]').value = tranche_de_date;
-            form.querySelector('textarea[name="texte"]').value = texte;
-            //form.querySelector('input[name="image"]').value = image;
-            editHistoireTitle.innerHTML = titre;
-        });
-    });
-
-    editArticleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-
-            let form = document.getElementById('edit-article')
-
-            // Récupère les données de l'article depuis les data-attributes
-            let articleId = button.dataset.id;
-            let titre = button.dataset.titre;
-            let taxonomie = button.dataset.taxonomie;
-            let texte = button.dataset.texte;
-            let image = button.dataset.image;
-
-            formlist.forEach(formItem => {
-                formItem.classList.add("hidden");
-            });
-            
-            form.closest('.edit-simulation-area').classList.remove("hidden");
-
-            // Remplit les champs du formulaire
-            form.querySelector('input[name="id"]').value = articleId;
-            form.querySelector('input[name="titre"]').value = titre;
-            form.querySelector('input[name="taxonomie"]').value = taxonomie;
-            form.querySelector('textarea[name="texte"]').value = texte;
-            //form.querySelector('input[name="image"]').value = image;
-            editArticleTitle.innerHTML = titre;
-        });
-    });
-} // normalement on a plus besoin de la fonction setupListenersAjax après avoir fini de coder en ajax
-
-//AJAX
 
 // AJAX LIEN ENTRE STAFF <-> EQUIPE (plus compliqué que le reste donc pas celui qu'il faut copypaste)
 
@@ -199,7 +95,6 @@ function addStaffEquipe(event) {
 
     });
 
-    console.log(idStaff, " ", idEquipe);
 }
 
 function removeStaffEquipe(event) {
@@ -207,6 +102,8 @@ function removeStaffEquipe(event) {
     let idStaff = event.target.dataset.staffid;
     let idEquipe = event.target.dataset.teamid;
     
+    console.log(idStaff, "help" ,idEquipe)
+
     fetch("./php/api/script.php", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -237,7 +134,7 @@ function updateStaffEquipe(idEquipe) {
 			// Response
 			var response = JSON.parse(this.responseText); 
 		
-			const templateAssigned = document.getElementById('templateStaff').innerHTML;
+			const templateAssigned = document.getElementById('templateStaffRela').innerHTML;
             const templateNotAssigned = document.getElementById('templateStaffOption').innerHTML;
             
             // On ajoute idteam à chaque staff pour Mustache
@@ -290,17 +187,16 @@ function addEquipe() {
         updateEquipe(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
     });
 }
-
 function removeEquipe(event) {
 
-    let idEquipe = event.target.dataset.id;
+    let id = event.target.dataset.id;
 
     fetch("./php/api/script.php", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
             action: "delete-team",
-            id_equipe: idEquipe 
+            id_team: id,
         })
     }) // changer action: "delete-team" par delete-... et l'id. (équivalent dans add)
     .then(response => {
@@ -323,7 +219,7 @@ function saveEquipe() {
         body: JSON.stringify({
             action: "edit-team", // changer les valeurs et actions
             nom: nom,
-            id_equipe: id,
+            id: id,
             lien_classement: lien_classement,
             lien_calendrier: lien_calendrier
         })
@@ -333,7 +229,6 @@ function saveEquipe() {
         updateEquipe();
     });
 }
-
 function updateEquipe() {
 
     var xhttp = new XMLHttpRequest();
@@ -348,7 +243,6 @@ function updateEquipe() {
             const render = Mustache.render(template, {teams : response}); // ne pas toucher
 			let container = document.getElementById('container-team'); // remplacer team par article, histoire... ce qui correspond dans le front
             container.innerHTML = render; // ne pas toucher
-            console.log(response);
             let editTeamButtons = document.querySelectorAll('.btn-team-edit'); //remplacer team pareil + changer nom de variable ici et dans le foreach
             let deleteTeambuttons = document.querySelectorAll('.btn-team-delete'); // remplacer team
 
@@ -369,7 +263,7 @@ function updateEquipe() {
             editTeamButtons.forEach(button => {
                 button.addEventListener("click", () => {
                     let form = document.getElementById("edit-team");
-                    let editTeamTitle = document.getElementById('titre-equipe-edit');
+                    let editTeamTitle = document.getElementById('titre-team-edit');
                     let formlist = document.querySelectorAll('.edit-simulation-area');
 
                     let id = button.dataset.id;
@@ -400,38 +294,570 @@ function updateEquipe() {
 
 // AJAX Sponsor
 
-function addSponsor() {}
-function removeSponsor(event) {}
-function saveSponsor() {}
-function updateSponsor() {}
+function addSponsor() {
+    let nom = document.getElementById("create-sponsor-nom").value; // seulement la première valeure (pas besoin de plus dans les formulaires en front)
+    
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "create-partenaire",
+            nom: nom // nom fait référence à let  nom = ... 
+        })
+    }) // changer action: "create-team" par create-... et nom: nom par titre: ... 
+    .then(response => {
+        updateSponsor(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function removeSponsor(event) {
+    let id = event.target.dataset.id;
+    console.log(id);
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "delete-partenaire",
+            id: id,
+        })
+    }) // changer action: "delete-team" par delete-... et l'id. (équivalent dans add)
+    .then(response => {
+        updateSponsor(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function saveSponsor() {
+    let id = document.getElementById("id-edit-sponsor").value;
+    let nom = document.getElementById("nom-edit-sponsor").value;
+    let image = document.getElementById("image-edit-sponsor").value;
+
+    // récupérer les valeurs modifiées dans le front (formulaire de modification avec display hidden...)
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "edit-partenaire", // changer les valeurs et actions
+            nom: nom,
+            id_partenaire: id,
+            image: image,
+        })
+    }) // insérer les valeurs
+    .then(response => {
+        // actualiser le front
+        updateSponsor();
+    });
+}
+function updateSponsor() {
+    var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "./php/api/script.php?action=get-partenaires", true); // remplacer ?action=get-teams par l'action codée dans l'api
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+        
+		if (this.readyState == 4 && this.status == 200) {
+			// Response
+			var response = JSON.parse(this.responseText); 
+			const template = document.getElementById('templatePartenaire').innerHTML; // remplacer templateTeam par le template mustache
+            const render = Mustache.render(template, {sponsors : response}); // ne pas toucher
+			let container = document.getElementById('container-sponsor'); // remplacer team par article, histoire... ce qui correspond dans le front
+            container.innerHTML = render; // ne pas toucher
+            let editTeamButtons = document.querySelectorAll('.btn-sponsor-edit'); //remplacer team pareil + changer nom de variable ici et dans le foreach
+            let deleteTeambuttons = document.querySelectorAll('.btn-sponsor-delete'); // remplacer team
+
+            deleteTeambuttons.forEach(button => {
+                button.addEventListener("click", (e) => {
+                    removeSponsor(e);
+                })
+            }) // ici on met des listeners sur les boutons de delete donc juste remplacer les noms de variables et les classes en fonction du front
+
+            editTeamButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    let form = document.getElementById("edit-sponsor");
+                    let editSponsorTitle = document.getElementById('titre-sponsor-edit');
+                    let formlist = document.querySelectorAll('.edit-simulation-area');
+
+                    let id = button.dataset.id;
+                    let nom = button.dataset.nom;
+                    let image = button.dataset.image;
+
+                    formlist.forEach(formItem => {
+                        formItem.classList.add("hidden");
+                    });
+            
+                    form.closest('.edit-simulation-area').classList.remove("hidden");
+
+                    document.getElementById("id-edit-sponsor").value = id;
+                    document.getElementById("nom-edit-sponsor").value = nom;
+                    document.getElementById("image-edit-sponsor").value = image;
+
+                    editSponsorTitle.innerHTML = nom;
+
+                    // pareil faut mettre les bonnes valeurs
+                });
+            });
+		};
+	};
+	xhttp.send();
+}
 
 // AJAX Joueur
 
-function addJoueur() {}
-function removeJoueur(event) {}
-function saveJoueur() {}
-function updateJoueur() {}
+function addJoueur() {
+    let nom = document.getElementById("create-joueur-nom").value; // seulement la première valeure (pas besoin de plus dans les formulaires en front)
+    
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "create-joueur",
+            nom: nom // nom fait référence à let  nom = ... 
+        })
+    }) // changer action: "create-team" par create-... et nom: nom par titre: ... 
+    .then(response => {
+        updateJoueur(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function removeJoueur(event) {
+    let idJoueur = event.target.dataset.id;
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "delete-joueur",
+            id_joueur: idJoueur 
+        })
+    }) // changer action: "delete-team" par delete-... et l'id. (équivalent dans add)
+    .then(response => {
+        updateJoueur(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function saveJoueur() {
+    let id = document.getElementById("id-edit-joueur").value;
+    let nom = document.getElementById("nom-edit-joueur").value;
+    let prenom = document.getElementById("prenom-edit-joueur").value;
+    let poste = document.getElementById("poste-edit-joueur").value;
+    let image = document.getElementById("image-edit-joueur").value;
+
+    // récupérer les valeurs modifiées dans le front (formulaire de modification avec display hidden...)
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "edit-joueur", // changer les valeurs et actions
+            nom: nom,
+            id_joueur: id,
+            prenom: prenom,
+            poste: poste,
+            image: image,
+        })
+    }) // insérer les valeurs
+    .then(response => {
+        // actualiser le front
+        updateJoueur();
+    });
+}
+function updateJoueur() {
+    
+    var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "./php/api/script.php?action=get-joueurs", true); // remplacer ?action=get-teams par l'action codée dans l'api
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+        
+		if (this.readyState == 4 && this.status == 200) {
+			// Response
+			var response = JSON.parse(this.responseText); 
+			const template = document.getElementById('templateJoueur').innerHTML; // remplacer templateTeam par le template mustache
+            const render = Mustache.render(template, {joueurs : response}); // ne pas toucher
+			let container = document.getElementById('container-joueur'); // remplacer team par article, histoire... ce qui correspond dans le front
+            container.innerHTML = render; // ne pas toucher
+            let editButtons = document.querySelectorAll('.btn-joueur-edit'); //remplacer team pareil + changer nom de variable ici et dans le foreach
+            let deletebuttons = document.querySelectorAll('.btn-joueur-delete'); // remplacer team
+
+            deletebuttons.forEach(button => {
+                button.addEventListener("click", (e) => {
+                    removeJoueur(e);
+                })
+            }) // ici on met des listeners sur les boutons de delete donc juste remplacer les noms de variables et les classes en fonction du front
+
+            editButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    let form = document.getElementById("edit-joueur");
+                    let editTitle = document.getElementById('titre-joueur-edit');
+                    let formlist = document.querySelectorAll('.edit-simulation-area');
+
+                    let id = button.dataset.id;
+                    let nom = button.dataset.nom;
+                    let prenom = button.dataset.prenom;
+                    let image = button.dataset.image;
+                    let poste = button.dataset.poste;
+
+                    formlist.forEach(formItem => {
+                        formItem.classList.add("hidden");
+                    });
+            
+                    form.closest('.edit-simulation-area').classList.remove("hidden");
+
+                    document.getElementById("id-edit-joueur").value = id;
+                    document.getElementById("nom-edit-joueur").value = nom;
+                    document.getElementById("prenom-edit-joueur").value = prenom;
+                    document.getElementById("poste-edit-joueur").value = poste;
+                    document.getElementById("image-edit-joueur").value = image;
+
+                    editTitle.innerHTML = nom;
+
+                    // pareil faut mettre les bonnes valeurs
+                });
+            });
+		};
+	};
+	xhttp.send();
+}
 
 // AJAX Staff
 
-function addStaff() {}
-function removeStaff(event) {}
-function saveStaff() {}
-function updateStaff() {}
+function addStaff() {
+    let nom = document.getElementById("create-staff-nom").value; // seulement la première valeure (pas besoin de plus dans les formulaires en front)
+    
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "create-staff",
+            nom: nom // nom fait référence à let  nom = ... 
+        })
+    }) // changer action: "create-team" par create-... et nom: nom par titre: ... 
+    .then(response => {
+        updateStaff(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function removeStaff(event) {
+    let id = event.target.dataset.id;
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "delete-staff",
+            id_staff: id // j'ai arrété de nommer l'id ça fait 1 de moins a remplacer 
+        })
+    })
+    .then(response => {
+        updateStaff(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function saveStaff() {
+    let id = document.getElementById("id-edit-staff").value;
+    let nom = document.getElementById("nom-edit-staff").value;
+    let prenom = document.getElementById("prenom-edit-staff").value;
+    let role = document.getElementById("role-edit-staff").value;
+    let email = document.getElementById("email-edit-staff").value;
+
+    // récupérer les valeurs modifiées dans le front (formulaire de modification avec display hidden...)
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "edit-staff", // changer les valeurs et actions
+            nom: nom,
+            id: id,
+            prenom: prenom,
+            role: role,
+            email: email,
+        })
+    }) // insérer les valeurs
+    .then(response => {
+        // actualiser le front
+        updateStaff();
+    });
+}
+function updateStaff() {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "./php/api/script.php?action=get-staffs", true); // remplacer ?action=get-teams par l'action codée dans l'api
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+        
+		if (this.readyState == 4 && this.status == 200) {
+			// Response
+			var response = JSON.parse(this.responseText); 
+			const template = document.getElementById('templateStaff').innerHTML; // remplacer templateTeam par le template mustache
+            const render = Mustache.render(template, {staffs : response}); // ne pas toucher
+			let container = document.getElementById('container-staff'); // remplacer team par article, histoire... ce qui correspond dans le front
+            container.innerHTML = render; // ne pas toucher
+            let editButtons = document.querySelectorAll('.btn-staff-edit'); //remplacer team pareil + changer nom de variable ici et dans le foreach
+            let deletebuttons = document.querySelectorAll('.btn-staff-delete'); // remplacer team
+
+            deletebuttons.forEach(button => {
+                button.addEventListener("click", (e) => {
+                    removeStaff(e);
+                })
+            }) // ici on met des listeners sur les boutons de delete donc juste remplacer les noms de variables et les classes en fonction du front
+
+            editButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    let form = document.getElementById("edit-staff");
+                    let editTitle = document.getElementById('titre-staff-edit');
+                    let formlist = document.querySelectorAll('.edit-simulation-area');
+
+                    let id = button.dataset.id;
+                    let nom = button.dataset.nom;
+                    let prenom = button.dataset.prenom;
+                    let role = button.dataset.role;
+                    let email = button.dataset.email;
+
+                    formlist.forEach(formItem => {
+                        formItem.classList.add("hidden");
+                    });
+            
+                    form.closest('.edit-simulation-area').classList.remove("hidden");
+
+                    document.getElementById("id-edit-staff").value = id;
+                    document.getElementById("nom-edit-staff").value = nom;
+                    document.getElementById("prenom-edit-staff").value = prenom;
+                    document.getElementById("role-edit-staff").value = role;
+                    document.getElementById("email-edit-staff").value = email;
+
+                    editTitle.innerHTML = nom;
+
+                    // pareil faut mettre les bonnes valeurs
+                });
+            });
+		};
+	};
+	xhttp.send();
+}
 
 // AJAX Histoire
 
-function addHistoire() {}
-function removeHistoire(event) {}
-function saveHistoire() {}
-function updateHistoire() {}
+function addHistoire() {
+
+    console.log("exec")
+    let titre = document.getElementById("create-histoire-titre").value; // seulement la première valeure (pas besoin de plus dans les formulaires en front)
+    
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "create-histoire",
+            titre: titre // nom fait référence à let  nom = ... 
+        })
+    }) // changer action: "create-team" par create-... et nom: nom par titre: ... 
+    .then(response => {
+        updateHistoire(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function removeHistoire(event) {
+    let id = event.target.dataset.id;
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "delete-histoire",
+            id: id // j'ai arrété de nommer l'id ça fait 1 de moins a remplacer 
+        })
+    })
+    .then(response => {
+        updateHistoire(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function saveHistoire() {
+    let id = document.getElementById("id-edit-histoire").value;
+    let titre = document.getElementById("titre-edit-histoire").value;
+    let image = document.getElementById("image-edit-histoire").value;
+    let contenu = document.getElementById("contenu-edit-histoire").value;
+    let date = document.getElementById("date-edit-histoire").value;
+
+    // récupérer les valeurs modifiées dans le front (formulaire de modification avec display hidden...)
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "edit-histoire", // changer les valeurs et actions
+            titre: titre,
+            id: id,
+            date: date,
+            image: image,
+            contenu: contenu,
+        })
+    }) // insérer les valeurs
+    .then(response => {
+        // actualiser le front
+        updateHistoire();
+    });
+}
+function updateHistoire() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "./php/api/script.php?action=get-histoires", true); // remplacer ?action=get-teams par l'action codée dans l'api
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+        
+		if (this.readyState == 4 && this.status == 200) {
+			// Response
+			var response = JSON.parse(this.responseText); 
+			const template = document.getElementById('templateHistoire').innerHTML; // remplacer templateTeam par le template mustache
+            const render = Mustache.render(template, {histoires : response}); // ne pas toucher
+			let container = document.getElementById('container-histoire'); // remplacer team par article, histoire... ce qui correspond dans le front
+            container.innerHTML = render; // ne pas toucher
+            let editButtons = document.querySelectorAll('.btn-histoire-edit'); //remplacer team pareil + changer nom de variable ici et dans le foreach
+            let deletebuttons = document.querySelectorAll('.btn-histoire-delete'); // remplacer team
+
+            deletebuttons.forEach(button => {
+                button.addEventListener("click", (e) => {
+                    removeHistoire(e);
+                })
+            }) // ici on met des listeners sur les boutons de delete donc juste remplacer les noms de variables et les classes en fonction du front
+
+            editButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    let form = document.getElementById("edit-histoire");
+                    let editTitle = document.getElementById('titre-histoire-edit');
+                    let formlist = document.querySelectorAll('.edit-simulation-area');
+
+                    let id = button.dataset.id;
+                    let titre = button.dataset.titre;
+                    let contenu = button.dataset.contenu;
+                    let date = button.dataset.date;
+                    let image = button.dataset.image;
+
+                    formlist.forEach(formItem => {
+                        formItem.classList.add("hidden");
+                    });
+            
+                    form.closest('.edit-simulation-area').classList.remove("hidden");
+
+                    document.getElementById("id-edit-histoire").value = id;
+                    document.getElementById("titre-edit-histoire").value = titre;
+                    document.getElementById("contenu-edit-histoire").value = contenu;
+                    document.getElementById("date-edit-histoire").value = date;
+                    document.getElementById("image-edit-histoire").value = image;
+
+                    editTitle.innerHTML = titre;
+
+                    // pareil faut mettre les bonnes valeurs
+                });
+            });
+		};
+	};
+	xhttp.send();
+}
 
 // AJAX Article
 
-function addArticle() {}
-function removeArticle(event) {}
-function saveArticle() {}
-function updateArticle() {}
+function addArticle() {
+    let titre = document.getElementById("create-article-titre").value; // seulement la première valeure (pas besoin de plus dans les formulaires en front)
+    
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "create-article",
+            titre: titre // nom fait référence à let  nom = ... 
+        })
+    }) // changer action: "create-team" par create-... et nom: nom par titre: ... 
+    .then(response => {
+        updateArticle(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function removeArticle(event) {
+    let id = event.target.dataset.id;
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "delete-article",
+            id_article: id // j'ai arrété de nommer l'id ça fait 1 de moins a remplacer 
+        })
+    })
+    .then(response => {
+        updateArticle(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
+    });
+}
+function saveArticle() {
+    let id = document.getElementById("id-edit-article").value;
+    let titre = document.getElementById("titre-edit-article").value;
+    let image = document.getElementById("image-edit-article").value;
+    let contenu = document.getElementById("contenu-edit-article").value;
+    let categorie = document.getElementById("categorie-edit-article").value;
+
+
+    // récupérer les valeurs modifiées dans le front (formulaire de modification avec display hidden...)
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "edit-article", // changer les valeurs et actions
+            titre: titre,
+            id: id,
+            image: image,
+            categorie: categorie,
+            contenu: contenu,
+        })
+    }) // insérer les valeurs
+    .then(response => {
+        // actualiser le front
+        updateArticle();
+    });
+}
+function updateArticle() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "./php/api/script.php?action=get-articles", true); // remplacer ?action=get-teams par l'action codée dans l'api
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+        
+		if (this.readyState == 4 && this.status == 200) {
+			// Response
+			var response = JSON.parse(this.responseText); 
+			const template = document.getElementById('templateArticle').innerHTML; // remplacer templateTeam par le template mustache
+            const render = Mustache.render(template, {articles : response}); // ne pas toucher
+			let container = document.getElementById('container-article'); // remplacer team par article, histoire... ce qui correspond dans le front
+            container.innerHTML = render; // ne pas toucher
+            let editButtons = document.querySelectorAll('.btn-article-edit'); //remplacer team pareil + changer nom de variable ici et dans le foreach
+            let deletebuttons = document.querySelectorAll('.btn-article-delete'); // remplacer team
+
+            deletebuttons.forEach(button => {
+                button.addEventListener("click", (e) => {
+                    removeArticle(e);
+                })
+            }) // ici on met des listeners sur les boutons de delete donc juste remplacer les noms de variables et les classes en fonction du front
+
+            editButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    let form = document.getElementById("edit-article");
+                    let editTitle = document.getElementById('titre-article-edit');
+                    let formlist = document.querySelectorAll('.edit-simulation-area');
+
+                    let id = button.dataset.id;
+                    let titre = button.dataset.titre;
+                    let contenu = button.dataset.contenu;
+                    let category = button.dataset.category;
+                    let image = button.dataset.image;
+
+                    formlist.forEach(formItem => {
+                        formItem.classList.add("hidden");
+                    });
+            
+                    form.closest('.edit-simulation-area').classList.remove("hidden");
+
+                    document.getElementById("id-edit-article").value = id;
+                    document.getElementById("titre-edit-article").value = titre;
+                    document.getElementById("contenu-edit-article").value = contenu;
+                    document.getElementById("categorie-edit-article").value = category;
+                    document.getElementById("image-edit-article").value = image;
+
+                    editTitle.innerHTML = titre;
+
+                    // pareil faut mettre les bonnes valeurs
+                });
+            });
+		};
+	};
+	xhttp.send();
+}
 
 // INIT
 
@@ -445,7 +871,7 @@ function init() {
     });
 
     document.querySelectorAll('.lazy-link-remove').forEach(form => {
-        updateStaffEquipe(form.dasaset.equipe)
+        updateStaffEquipe(form.dataset.equipe)
     })
 
     updateEquipe();

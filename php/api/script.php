@@ -105,12 +105,11 @@ if (isset($action)) {
         }
         
         case "delete-team": {
-            $id = $input['id_equipe'] ?? null; // ici on prend un id pour supprimer de la db id_article, id_joueur...
+            $id = $input['id_team'] ?? null; // ici on prend un id pour supprimer de la db id_article, id_joueur...
             $objet = Database::getInstance()->loadEquipe($id); // ici il faut loadArticle() ou loadHistoire => les méthodes sans -s à la fin load un seul objet
             $objet->delete(); // ne pas changer cette ligne et la garder
             echo json_encode(["success" => true]); // ne pas changer cette ligne et la garder
             break; // ne pas changer cette ligne et la garder
-
             //théoriquement faudrait supprimer les liens dans la table staff_equipe mais pas le temps :-(
         }
 
@@ -118,7 +117,7 @@ if (isset($action)) {
 
             /* les attributs changent à chaque fois, globalement faut récupérer les champs de la bdd  */
 
-            $id = $input['id_equipe'] ?? null;
+            $id = $input['id'] ?? null;
             $lien_classement = $input['lien_classement'] ?? null;
             $lien_calendrier = $input['lien_calendrier'] ?? null;
             $nom = $input['nom'] ?? null;
@@ -141,13 +140,8 @@ if (isset($action)) {
         // GESTION DES ARTICLES
 
         case "create-article": {
-            $titre = $input['titre'] ?? null;
-            $contenu = $input['contenu'] ?? null;
-            $date = $input['date'] ?? null;
-            $categorie = $input['categorie'] ?? null;
-            $image = $input['image'] ?? null;
 
-            $objet = new Article(null, $titre, $contenu, $date, $categorie, $image); 
+            $objet = new Article(null, null, $input['titre'], null, null, null); 
             $objet->save();
             echo json_encode(["success" => true]);
             break;
@@ -162,10 +156,9 @@ if (isset($action)) {
         }
 
         case "edit-article": {
-            $id = $input['id_article'] ?? null;
+            $id = $input['id'] ?? null;
             $titre = $input['titre'] ?? null;
             $contenu = $input['contenu'] ?? null;
-            $date = $input['date'] ?? null;
             $categorie = $input['categorie'] ?? null;
             $image = $input['image'] ?? null;
 
@@ -173,8 +166,7 @@ if (isset($action)) {
 
             // Mise à jour des attributs
             $objet->titre = $titre;
-            $objet->contenu = $contenu;
-            $objet->date = $date;
+            $objet->texte = $contenu;
             $objet->categorie = $categorie;
             $objet->image = $image;
 
@@ -186,38 +178,33 @@ if (isset($action)) {
         // GESTION DES HISTOIRES
 
         case "create-histoire": {
-            $titre = $input['titre'] ?? null;
-            $description = $input['description'] ?? null;
-            $date = $input['date'] ?? null;
-            $image = $input['image'] ?? null;
-
-
-            $objet = new Histoire(null, $titre, $description, $date, $image);
+            $titre = $input['titre'];
+            $objet = new Histoire(null, null, $titre, null, null);
             $objet->save();
             echo json_encode(["success" => true]);
             break;
         }
 
         case "delete-histoire": {
-            $id = $input['id_histoire'] ?? null;
-            $objet = Database::getInstance()->loadHistory($id);
+            $id = $input['id'] ?? null;
+            $objet = Database::getInstance()->loadHistoire($id);
             $objet->delete();
             echo json_encode(["success" => true]);
             break;
         }
 
         case "edit-histoire": {
-            $id = $input['id_histoire'] ?? null;
+            $id = $input['id'] ?? null;
             $titre = $input['titre'] ?? null;
-            $description = $input['description'] ?? null;
+            $contenu = $input['contenu'] ?? null;
             $date = $input['date'] ?? null;
             $image = $input['image'] ?? null;
 
-            $objet = Database::getInstance()->loadHistory($id);
+            $objet = Database::getInstance()->loadHistoire($id);
 
             $objet->titre = $titre;
-            $objet->description = $description;
-            $objet->date = $date;
+            $objet->texte = $contenu;
+            $objet->tranche_date = $date;
             $objet->image = $image;
 
             $objet->save();
@@ -228,14 +215,8 @@ if (isset($action)) {
         // GESTION DES JOUEURS
 
         case "create-joueur": {
-            $nom = $input['nom'] ?? null;
-            $prenom = $input['prenom'] ?? null;
-            $poste = $input['poste'] ?? null;
-            $numero = $input['numero'] ?? null;
-            $image = $input['image'] ?? null;
-            $id_equipe = $input['id_equipe'] ?? null;
-
-            $objet = new Joueur(null, $nom, $prenom, $poste, $numero, $image, $id_equipe);
+            $nom = $input['nom'];
+            $objet = new Joueur(null, $nom, null, null, null);
             $objet->save();
             echo json_encode(["success" => true]);
             break;
@@ -256,7 +237,6 @@ if (isset($action)) {
             $poste = $input['poste'] ?? null;
             $numero = $input['numero'] ?? null;
             $image = $input['image'] ?? null;
-            $id_equipe = $input['id_equipe'] ?? null;
 
             $objet = Database::getInstance()->loadJoueur($id);
 
@@ -265,7 +245,6 @@ if (isset($action)) {
             $objet->poste = $poste;
             $objet->numero = $numero;
             $objet->image = $image;
-            $objet->id_equipe = $id_equipe;
 
             $objet->save();
             echo json_encode(["success" => true]);
@@ -275,18 +254,15 @@ if (isset($action)) {
         // GESTION DES PARTENAIRES
 
         case "create-partenaire": {
-            $nom = $input['nom'] ?? null;
-            $logo = $input['logo'] ?? null;
-            $lien = $input['lien'] ?? null;
-
-            $objet = new Partenaire(null, $nom, $logo, $lien);
+            $nom = $input["nom"];
+            $objet = new Partenaire(null, null, $nom);
             $objet->save();
             echo json_encode(["success" => true]);
             break;
         }
 
         case "delete-partenaire": {
-            $id = $input['id_partenaire'] ?? null;
+            $id = $input['id'] ?? null;
             $objet = Database::getInstance()->loadPartner($id);
             $objet->delete();
             echo json_encode(["success" => true]);
@@ -294,7 +270,7 @@ if (isset($action)) {
         }
 
         case "edit-partenaire": {
-            $id = $input['id_partenaire'] ?? null;
+            $id = $input['id'] ?? null;
             $nom = $input['nom'] ?? null;
             $logo = $input['logo'] ?? null;
             $lien = $input['lien'] ?? null;
@@ -313,12 +289,8 @@ if (isset($action)) {
         // GESTION DU STAFF
 
         case "create-staff": {
-            $nom = $input['nom'] ?? null;
-            $prenom = $input['prenom'] ?? null;
-            $role = $input['role'] ?? null;
-            $image = $input['image'] ?? null;
-
-            $objet = new Staff(null, $nom, $prenom, $role, $image);
+            $nom = $input["nom"];
+            $objet = new Staff(null, $nom, null, null, null);
             $objet->save();
             echo json_encode(["success" => true]);
             break;
@@ -333,18 +305,19 @@ if (isset($action)) {
         }
 
         case "edit-staff": {
-            $id = $input['id_staff'] ?? null;
+            
+            $id = $input['id'] ?? null;
             $nom = $input['nom'] ?? null;
             $prenom = $input['prenom'] ?? null;
             $role = $input['role'] ?? null;
-            $image = $input['image'] ?? null;
+            $email = $input['email'] ?? null;
 
             $objet = Database::getInstance()->loadStaff($id);
 
             $objet->nom = $nom;
             $objet->prenom = $prenom;
             $objet->role = $role;
-            $objet->image = $image;
+            $objet->email = $email;
 
             $objet->save();
             echo json_encode(["success" => true]);
