@@ -921,8 +921,9 @@ ul {
     flex-direction: column;
     justify-content: center;
     padding: 50px;
-    min-height: 65vh; /*afin qu'il prennent toute la place*/
+    min-height: 65vh; /*afin qu'il prennen toute la place*/
     align-items: center;
+    min-height: 63vh;
 }
 
 .form {
