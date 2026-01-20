@@ -86,7 +86,7 @@
                 foreach($partners as $partner):
                 ?>
                 <div class="partner-box">
-                    <img src="<?php echo $partner->logo;?>" alt="Partenaire" class="partner-logo">
+                    <img src="<?php echo "./php/api/images/sponsors/" . $partner->logo;?>" alt="Partenaire" class="partner-logo">
                     <span class="partner-name"><?php echo $partner->nom?></span>
                 </div>
                 <?php endforeach; ?>

@@ -132,7 +132,7 @@ if (!isset($_SESSION['admin_id'])) {
                             </div>
                             <div class="form-group">
                                 <label>Logo :</label>
-                                <input type="file" id="image-edit-sponsor">
+                                <input type="file" name="image" id="image-edit-sponsor">
                             </div>
                         <button id="validate-sponsor-button" type="button" class="btn-admin">Sauvegarder le sponsor</button>
                     </div>
@@ -447,7 +447,7 @@ if (!isset($_SESSION['admin_id'])) {
     {{#sponsors}}
     <tr>
         <td> {{ nom }} </td>
-        <td><img src="{{ logo }}"height="50"></td>
+        <td><img src="images/sponsors/{{ logo }}" height="50"></td>
         <td>
             <button 
                 type="button" 

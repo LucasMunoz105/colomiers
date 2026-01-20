@@ -269,23 +269,6 @@ if (isset($action)) {
             break;
         }
 
-        case "edit-partenaire": {
-            $id = $input['id'] ?? null;
-            $nom = $input['nom'] ?? null;
-            $logo = $input['logo'] ?? null;
-            $lien = $input['lien'] ?? null;
-
-            $objet = Database::getInstance()->loadPartner($id);
-
-            $objet->nom = $nom;
-            $objet->logo = $logo;
-            $objet->lien = $lien;
-
-            $objet->save();
-            echo json_encode(["success" => true]);
-            break;
-        }
-
         // GESTION DU STAFF
 
         case "create-staff": {
@@ -330,6 +313,49 @@ if (isset($action)) {
         /* j'ai commenté les cases pour que ça soit à peu près guidé ! woooho*/
         /* il faut rajouter pour articles histoires partenaires staffs et joueurs */
 
+}
+
+if (isset($_POST["action"])) {
+
+    switch ($_POST["action"]) {
+
+        case "edit-partenaire": {
+            
+            $id = $_POST['id'] ?? null;
+            $nom = $_POST['nom'] ?? null;
+            $file = $_FILES['image'];
+        
+            $objet = Database::getInstance()->loadPartner($id);
+            $objet->nom = $nom;
+        
+            error_reporting(E_ALL);
+        
+            $uploadDir = __DIR__ . '/images/sponsors/';
+
+            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $filePath = $uploadDir . $id . '.' . $extension;
+    
+            move_uploaded_file($file['tmp_name'], $filePath);
+            $objet->logo = $id . '.' . $extension;
+    
+            $db = Database::getInstance()->getConnection();
+    
+            $sql = "UPDATE partenaire 
+                SET photo = :photo
+                WHERE id_partenaire = :id";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([
+                'id' => $id,
+                'photo' => $objet->logo
+                ]);                
+            
+
+            $objet->save();
+        
+            echo json_encode(["success" => true]);
+            break;
+        }
+    }
 }
 
 ?>

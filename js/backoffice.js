@@ -308,6 +308,8 @@ function addSponsor() {
     .then(response => {
         updateSponsor(); //update le front sur les données une fois qu'on a ajouté updateArticle() ....
     });
+
+    
 }
 function removeSponsor(event) {
     let id = event.target.dataset.id;
@@ -325,11 +327,42 @@ function removeSponsor(event) {
     });
 }
 function saveSponsor() {
+
     let id = document.getElementById("id-edit-sponsor").value;
     let nom = document.getElementById("nom-edit-sponsor").value;
-    let image = document.getElementById("image-edit-sponsor").value;
+    let image = document.getElementById("image-edit-sponsor").files[0];
 
-    // récupérer les valeurs modifiées dans le front (formulaire de modification avec display hidden...)
+    let formData = new FormData();
+    formData.append("action", "edit-partenaire");
+    formData.append("id", id);
+    formData.append("nom", nom);
+
+    if (image) {
+        formData.append("image", image);
+    }
+
+    for(let pair of formData.entries()){
+        console.log(pair[0], pair[1]);
+    }
+
+    fetch("./php/api/script.php", {
+        method: "POST",
+        body: formData // PAS de Content-Type ici !
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // debug
+        updateSponsor();
+    })
+    .catch(err => console.error(err));
+
+
+    /* let id = document.getElementById("id-edit-sponsor").value;
+    let nom = document.getElementById("nom-edit-sponsor").value;
+    let image = document.getElementById("image-edit-sponsor").files[0];
+
+    console.log(image)
+
 
     fetch("./php/api/script.php", {
         method: "POST",
@@ -344,7 +377,7 @@ function saveSponsor() {
     .then(response => {
         // actualiser le front
         updateSponsor();
-    });
+    }); */
 }
 function updateSponsor() {
     var xhttp = new XMLHttpRequest();
@@ -381,12 +414,12 @@ function updateSponsor() {
                     formlist.forEach(formItem => {
                         formItem.classList.add("hidden");
                     });
-            
+
                     form.closest('.edit-simulation-area').classList.remove("hidden");
 
                     document.getElementById("id-edit-sponsor").value = id;
                     document.getElementById("nom-edit-sponsor").value = nom;
-                    document.getElementById("image-edit-sponsor").value = image;
+                    document.getElementById("image-edit-sponsor").files[0] = image;
 
                     editSponsorTitle.innerHTML = nom;
 

@@ -16,10 +16,31 @@ class Partenaire {
         $this->nom = $nom;
     }
 
+    public function uploadLogo($file) {
+        $uploadDir = __DIR__ . '/images/sponsors/';
+
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $filePath = $uploadDir . $this->id . '.' . $extension;
+
+        move_uploaded_file($file['tmp_name'], $filePath);
+        $this->logo = $this->id . '.' . $extension;
+
+        $db = Database::getInstance()->getConnection();
+
+        $sql = "UPDATE partenaire 
+            SET photo = :photo
+            WHERE id_partenaire = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+            'id' => $this->id,
+            'photo' => $this->logo
+            ]);
+    }
+
     public function delete() {
         if ($this->id === null) {
-        return;
-    }
+            return;
+        }
 
         $db = Database::getInstance()->getConnection();
         $stmt = $db->prepare("DELETE FROM partenaire WHERE id_partenaire = :id"); 
@@ -30,7 +51,6 @@ class Partenaire {
 
     public function save() {
         $db = Database::getInstance()->getConnection();
-
         if ($this->id === null) {
             // CREATE
             $sql = "INSERT INTO partenaire (photo, nom_societe)
@@ -44,13 +64,11 @@ class Partenaire {
         } else {
             // UPDATE
             $sql = "UPDATE partenaire 
-                    SET photo = :photo, 
-                        nom_societe = :nom_societe
+                    SET nom_societe = :nom_societe
                     WHERE id_partenaire = :id";
             $stmt = $db->prepare($sql);
             $stmt->execute([
                 'id' => $this->id,
-                'photo' => $this->logo,
                 'nom_societe' => $this->nom
             ]);
         }
