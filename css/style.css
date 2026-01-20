@@ -246,6 +246,7 @@ ul {
     padding: 30px 0;
     margin-top: 40px;
     border-top: 1px solid rgba(10, 14, 45, 0.1);
+    
 }
 
 .footer-container {
@@ -2398,4 +2399,83 @@ PAGE ADMINISTRATION */
     transform: translateY(0);
     background-color: var(--primary-blue);
     color: var(--white);
+}
+
+/* --- CLASSEMENT STYLE --- */
+.classement-table {
+    width: 100%;
+    border-collapse: separate; /* bords arrondis */
+    border-spacing: 0;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-main);
+    margin-top: 10px;
+}
+
+.classement-table thead tr {
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
+.classement-table th {
+    padding: 18px;
+    font-family: var(--font-titles);
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    border: none;
+    text-align: left;
+}
+
+.classement-table td {
+    padding: 15px 18px;
+    border-bottom: 1px solid #eee;
+    font-family: var(--font-body);
+    color: var(--dark-blue);
+    transition: background 0.2s;
+}
+
+.rank-col {
+    font-weight: 700;
+    color: var(--grey-text);
+    width: 60px;
+    text-align: center;
+}
+.rank-head { text-align: center !important; }
+
+.team-col {
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.points-col {
+    font-weight: 800;
+    color: var(--primary-blue);
+    width: 80px;
+    text-align: center;
+    font-size: 1.1rem;
+    background-color: rgba(0, 0, 239, 0.05);
+}
+.pts-head { text-align: center !important; }
+
+/* Effet zebré*/
+.classement-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.classement-table tbody tr:hover td {
+    background-color: var(--platinum);
+    color: var(--primary-blue);
+    cursor: default;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .classement-table th, .classement-table td {
+        padding: 12px 10px;
+        font-size: 0.9rem;
+    }
+    .rank-col { width: 40px; }
+    .points-col { width: 50px; }
 }
