@@ -163,6 +163,10 @@ ul {
     color: var(--primary-blue);
 }
 
+.mobile-only-btn {
+    display: none;
+}
+
 /* HERO SECTION */
 .hero-section {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../assets/bg_index.png');
@@ -1176,7 +1180,6 @@ ul {
     .nav-menu ul {
         display: none;
         flex-direction: column;
-        /* Le menu déroulant reste en colonne (vertical) */
         position: absolute;
         top: 100%;
         left: 0;
@@ -1188,10 +1191,27 @@ ul {
         gap: 20px;
         z-index: 999;
     }
-
     /* Quand on clique la classe .active s'affiche */
     .nav-menu ul.active {
         display: flex;
+    }
+
+    .desktop-only-btn {
+        display: none; 
+    }
+
+    .mobile-only-btn {
+        display: block;
+        margin-top: 10px; 
+    }
+
+    .nav-menu .btn-main, 
+    .nav-menu .btn-main:hover {
+        color: var(--white) !important;
+    }
+
+    .header-container {
+        padding-right: var(--space-md);
     }
 }
 
